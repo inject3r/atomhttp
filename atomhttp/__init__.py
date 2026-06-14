@@ -48,7 +48,7 @@ from .core.form_data import FormData
 from .core.adapters import HTTPAdapter, MockAdapter
 from .interceptors.manager import InterceptorManager
 
-__version__ = "2.0.0"
+__version__ = "1.0.1"
 
 __all__ = [
     # Main client

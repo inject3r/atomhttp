@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "atomhttp"
-version = "1.0.0"
+version = "1.0.1"
 description = "Professional asynchronous HTTP client for Python — interceptors, progress tracking, FormData, Blob, concurrent requests, and full type hints"
 readme = "README.md"
 requires-python = ">=3.8"

@@ -558,6 +558,14 @@ class AtomHTTP:
             >>> response = await client.post('/upload', data=form)
         """
         return FormData()
+
+    async def __aenter__(self):
+        """Enter async context manager."""
+        return self
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Exit async context manager and close client."""
+        await self.close()
     
     async def close(self) -> None:
         """
