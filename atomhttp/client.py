@@ -85,6 +85,39 @@ class AtomHTTP:
         # Initialize interceptor manager and request handler
         self.interceptors = InterceptorManager()
         self._request_handler = RequestHandler(self.defaults, self.interceptors)
+        self._is_closed = False
+    
+    async def __aenter__(self):
+        """
+        Async context manager entry point.
+        
+        Allows using the client with 'async with' statement for automatic
+        resource cleanup and guaranteed session closure.
+        
+        Returns:
+            AtomHTTP: Self instance
+        
+        Example:
+            >>> async with AtomHTTP({'baseURL': 'https://api.example.com'}) as client:
+            ...     response = await client.get('/api/users')
+            ...     # Session automatically closed on exit
+        """
+        return self
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """
+        Async context manager exit point.
+        
+        Ensures the client is properly closed and all connections are cleaned up
+        when exiting the context.
+        
+        Args:
+            exc_type: Exception type if an error occurred
+            exc_val: Exception value if an error occurred
+            exc_tb: Exception traceback if an error occurred
+        """
+        await self.close()
+        return False
     
     async def request(self, config: Union[RequestConfig, Dict]) -> Response:
         """
@@ -558,14 +591,6 @@ class AtomHTTP:
             >>> response = await client.post('/upload', data=form)
         """
         return FormData()
-
-    async def __aenter__(self):
-        """Enter async context manager."""
-        return self
-    
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        """Exit async context manager and close client."""
-        await self.close()
     
     async def close(self) -> None:
         """
@@ -574,12 +599,22 @@ class AtomHTTP:
         This method should be called when the client is no longer needed
         to properly close connections and release system resources.
         
+        Alternatively, use the client with 'async with' statement for automatic
+        cleanup:
+        
         Example:
+            >>> # Manual close
             >>> client = AtomHTTP()
             >>> try:
             ...     response = await client.get('/data')
             ... finally:
             ...     await client.close()
+            
+            >>> # Automatic close with context manager
+            >>> async with AtomHTTP() as client:
+            ...     response = await client.get('/data')
         """
-        if hasattr(self._request_handler, 'default_adapter'):
-            await self._request_handler.default_adapter.close()
+        if not self._is_closed:
+            if hasattr(self._request_handler, 'default_adapter'):
+                await self._request_handler.default_adapter.close()
+            self._is_closed = True

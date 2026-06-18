@@ -12,8 +12,7 @@ but focus primarily on client-side configuration logic.
 """
 
 import pytest
-from atomhttp import AtomHTTP
-from atomhttp.client import RequestConfig
+from atomhttp import AtomHTTP, RequestConfig
 
 
 @pytest.mark.asyncio

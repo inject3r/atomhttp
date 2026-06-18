@@ -11,6 +11,7 @@ settings, and accessing default values as attributes.
 
 from typing import Dict, Any
 from .config import RequestConfig
+from .. import __version__
 
 
 class Defaults:
@@ -68,7 +69,7 @@ class Defaults:
             # Default headers for all requests
             headers={
                 'Accept': 'application/json, text/plain, */*',
-                'User-Agent': 'atomhttp/2.0.0'
+                'User-Agent': f'atomhttp/{__version__}'
             },
             # Request timeout in seconds
             timeout=30,

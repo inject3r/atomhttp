@@ -150,6 +150,12 @@ class RequestConfig:
     # Custom adapter
     adapter: Optional[Any] = None
     
+    # SSL/TLS verification
+    verify: bool = True
+    
+    # Retry configuration for automatic retries with exponential backoff
+    retryConfig: Optional[Dict[str, Any]] = None
+    
     # Transitional options for backward compatibility
     transitional: Dict[str, bool] = field(default_factory=lambda: {
         'silentJSONParsing': True,
