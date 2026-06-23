@@ -52,7 +52,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 2. **Clone your fork locally**:
 
 ```bash
-git clone https://github.com/inject3r/atomhttp.git
+git clone https://github.com/YOUR_USERNAME/atomhttp.git
 cd atomhttp
 ```
 
