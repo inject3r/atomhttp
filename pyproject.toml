@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "atomhttp"
-version = "1.2.2"
+version = "1.2.4"
 description = "Professional asynchronous HTTP client for Python — interceptors, progress tracking, FormData, Blob, concurrent requests, connection pooling, retry mechanism, and full type hints"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -223,7 +223,7 @@ output = "coverage.xml"
 output = "coverage.json"
 
 [tool.bumpversion]
-current_version = "2.0.0"
+current_version = "1.2.4"
 commit = true
 tag = true
 tag_name = "v{new_version}"
@@ -231,7 +231,7 @@ commit_message = "chore: bump version to {new_version}"
 allow_dirty = false
 
 [tool.bumpversion.files]
-filename = "atomhttp/__init__.py"
+filename = "atomhttp/version.py"
 search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
 
@@ -241,9 +241,9 @@ replace = 'version = "{new_version}"'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2.0.0"
+version = "1.2.4"
 version_files = [
-    "atomhttp/__init__.py",
+    "atomhttp/version.py",
     "pyproject.toml",
 ]
 tag_format = "v$version"

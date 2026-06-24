@@ -11,7 +11,7 @@ settings, and accessing default values as attributes.
 
 from typing import Dict, Any
 from .config import RequestConfig
-from .. import __version__
+from ..version import __version__
 
 
 class Defaults:
